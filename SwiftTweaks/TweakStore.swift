@@ -95,6 +95,11 @@ public final class TweakStore {
 		binding()
 	}
 
+  public func setValue<T: TweakableType>(value: T, forTweak tweak: AnyTweak) {
+    persistence.setValue(value, forTweakIdentifiable: tweak)
+    updateBindingsForTweak(tweak)
+  }
+
 	// MARK: - Internal
 	
 	/// Resets all tweaks to their `defaultValue`
@@ -142,7 +147,7 @@ public final class TweakStore {
 	internal func setValue(viewData: TweakViewData, forTweak tweak: AnyTweak) {
 		persistence.setValue(viewData.value, forTweakIdentifiable: tweak)
 		updateBindingsForTweak(tweak)
-	}
+  }
 
 
 	// MARK - Private
